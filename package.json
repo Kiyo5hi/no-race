@@ -5,6 +5,10 @@
   "devDependencies": {
     "@types/bun": "latest"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Kiyo5hi/no-race.git"
+  },
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
