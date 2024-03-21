@@ -35,16 +35,16 @@ console.log(results)
 
 
 ```typescript
-import { EagerQueue } from 'no-race'
+import { LazyQueue } from 'no-race'
 import { sleep } from 'bun'
 
 results = []
 promises = []
 
-const eagerQueue = new EagerQueue()
+const lazyQueue = new LazyQueue()
 
 for (let i = 0; i < 10; i++) {
-    const done = eagerQueue.enqueue(async () => {
+    const done = lazyQueue.enqueue(async () => {
         await sleep(Math.random() * 100)
         results.push(i)
     })
