@@ -1,7 +1,7 @@
 import { sleep } from 'bun'
 import { test, expect } from 'bun:test'
 
-import { EagerQueue } from '.'
+import { EagerQueue, LazyQueue } from '.'
 
 test('eager queue', async () => {
     let results: number[] = []
@@ -39,3 +39,22 @@ test('eager queue', async () => {
 
     // retry since `random` is not deterministic
 }, { retry: 1 })
+
+test('lazy queue', async () => {
+    let results: number[] = []
+    let promises: Promise<unknown>[] = []
+
+    const lazyQueue = new LazyQueue()
+
+    for (let i = 0; i < 10; i++) {
+        const done = lazyQueue.enqueue(async () => {
+            await sleep(Math.random() * 100)
+            results.push(i)
+        })
+        promises.push(done)
+    }
+
+    await Promise.all(promises)
+
+    expect(results.length).toBeLessThan(10)
+})
