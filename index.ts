@@ -1,10 +1,14 @@
 export type Consumable<T> = () => Promise<T>;
 export type Resolve<T> = (value: T | PromiseLike<T>) => void
 
+export interface Queue<T> {
+    enqueue(consumable: Consumable<T>): Promise<T | undefined>;
+}
+
 /**
  * EagerQueue queues and processes items in the order they are enqueued.
  */
-export class EagerQueue<T> {
+export class EagerQueue<T> implements Queue<T> {
     #queue: [Consumable<T>, Resolve<T>][] = [];
     #isProcessing = false;
 
@@ -47,7 +51,7 @@ export class BusyQueueError extends Error {
 /**
  * LazyQueue only queues item when it is not processing an item.
  */
-export class LazyQueue<T> {
+export class LazyQueue<T> implements Queue<T> {
     #currentConsumable: [Consumable<T>, Resolve<T>] | undefined;
     #errorOnSkip: boolean;
 

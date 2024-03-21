@@ -5,3 +5,5 @@ await Bun.build({
     target: "browser",
     format: "esm",
 });
+
+export { };

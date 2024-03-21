@@ -27,7 +27,7 @@ test('eager queue', async () => {
 
     for (let i = 0; i < 10; i++) {
         const done = eagerQueue.enqueue(async () => {
-            await sleep(Math.random() * 100)
+            await sleep(Math.random() * 10)
             results.push(i)
         })
         promises.push(done)
@@ -48,7 +48,7 @@ test('lazy queue', async () => {
 
     for (let i = 0; i < 10; i++) {
         const done = lazyQueue.enqueue(async () => {
-            await sleep(Math.random() * 100)
+            await sleep(Math.random() * 10)
             results.push(i)
         })
         promises.push(done)
