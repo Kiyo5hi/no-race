@@ -18,5 +18,6 @@
   "main": "dist/index.js",
   "files": [
     "dist"
-  ]
+  ],
+  "version": "0.0.1"
 }
